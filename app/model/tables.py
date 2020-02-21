@@ -8,31 +8,6 @@
 # Base = declarative_base()
 # Base.query = db_session.query_property()
 
-
-from app import db
-
-
-class Pessoas(db.Model):
-    __tablename__ = 'pessoas'
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(40), index=True)
-    idade = db.Column(db.Integer)
-
-    def __repr__(self):
-        return '<Pessoa {}>'.format(self.nome)
-
-
-class Atividades(db.Model):
-    __tablename__ = 'atividades'
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(80))
-    pessoa_id = db.Column(db.Integer, db.ForeignKey('pessoas.id'))
-
-    pessoa = db.relationship("Pessoas")
-
-    def __repr__(self):
-        return '<Atividade {}>'.format(self.nome)
-
 # class Pessoas(Base):
 #     __tablename__ = 'pessoas'
 #     id = Column(Integer, primary_key=True)
@@ -58,3 +33,27 @@ class Atividades(db.Model):
 #
 # if __name__ == '__main__':
 #     init_db()
+
+from app import db
+
+
+class Pessoas(db.Model):
+    __tablename__ = 'pessoas'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nome = db.Column(db.String(40), index=True)
+    idade = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Pessoa {}>'.format(self.nome)
+
+
+class Atividades(db.Model):
+    __tablename__ = 'atividades'
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(80))
+    pessoa_id = db.Column(db.Integer, db.ForeignKey('pessoas.id'))
+
+    pessoa = db.relationship("Pessoas")
+
+    def __repr__(self):
+        return '<Atividade {}>'.format(self.nome)

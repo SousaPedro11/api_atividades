@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% block form %}
+        <form action="" method="post" autocapitalize="on">
+            <h2>Cadastro de Pessoa</h2>
+            {{ form.csrf_token }}
+            <div>
+                {{ form.nome.label }}
+                {{ form.nome(size=40, class="form-control", placeholder="Informe o nome") }}<br>
+                {% for error in form.nome.errors %}
+                    <span class="alert-info">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.idade.label }}
+                {{ form.idade(size=40, class="form-control", placeholder="Informe a idade") }}<br>
+                {% for error in form.idade.errors %}
+                    <span class="alert-info">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <input type="submit" name="cadastrar" value="Cadastrar">
+            <a href="{{ url_for('cadastrar_pessoa') }}">
+                <input type="button" name="cancelar" value="Cancelar">
+            </a>
+        </form>
+    {% endblock %}
+{% endblock %}
